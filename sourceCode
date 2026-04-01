@@ -1,1 +1,58 @@
-sourceD
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+class Emprunt {
+public:
+    // Fonction de calcul de mensualité
+    float calculerMensualite(float cap, float tauxAnn, int nbAn) {
+        if (tauxAnn <= 0) return cap / (nbAn * 12);
+        float tauxMens = (tauxAnn / 100) / 12;
+        int nbMois = nbAn * 12;
+        float puissance = pow((1 + tauxMens), nbMois);
+        return (cap * tauxMens * puissance) / (puissance - 1);
+    }
+};
+
+int main() {
+    Emprunt simulateur;
+    float capital = 100000; 
+    string banques[] = {"CA", "LCL", "Societe G", "Banque Pop"};
+    float taux[] = {3.0, 4.0};
+    int durees[] = {10, 15, 20};
+
+    cout << fixed << setprecision(2);
+    cout << "--- COMPARATEUR DE PRETS (Capital: " << (int)capital << " ) ---" << endl << endl;
+
+    // Ligne d'en-tête avec le nom des banques
+    cout << setw(15) << "Duree / Banque" << " | ";
+    for (int i = 0; i < 4; i++) {
+        cout << setw(12) << banques[i] << " | ";
+    }
+    cout << "\n" << string(75, '-') << endl;
+
+    // Boucle sur les différents taux (Taux 1 puis Taux 2)
+    for (int t = 0; t < 2; t++) {
+        cout << " TAUX : " << taux[t] << "%" << endl;
+        cout << string(75, '-') << endl;
+
+        // Pour chaque taux, on affiche les 3 durées
+        for (int d = 0; d < 3; d++) {
+            string label = to_string(durees[d]) + " ans";
+            cout << setw(15) << label << " | ";
+            
+            // Calcul pour chaque banque
+            for (int b = 0; b < 4; b++) {
+                float mens = simulateur.calculerMensualite(capital, taux[t], durees[d]);
+                cout << setw(12) << mens << " | ";
+            }
+            cout << endl;
+        }
+        cout << string(75, '-') << endl << endl;
+    }
+
+    return 0;
+}
