@@ -2,12 +2,12 @@
 #include <cmath>
 #include <iomanip>
 #include <string>
+#include <vector> // Pour les listes dynamiques
 
 using namespace std;
 
 class Emprunt {
 public:
-    // Fonction de calcul de mensualité
     float calculerMensualite(float cap, float tauxAnn, int nbAn) {
         if (tauxAnn <= 0) return cap / (nbAn * 12);
         float tauxMens = (tauxAnn / 100) / 12;
@@ -19,39 +19,58 @@ public:
 
 int main() {
     Emprunt simulateur;
-    float capital = 100000; 
-    string banques[] = {"CA", "LCL", "Societe G", "Banque Pop"};
+    vector<string> banques; // Liste dynamique de banques
+    string nomBanque;
+    char choix;
+
+    // 1. Saisie dynamique des banques
+    cout << "--- CONFIGURATION DES BANQUES ---" << endl;
+    do {
+        cout << "Entrez le nom d'une banque : ";
+        cin >> nomBanque;
+        banques.push_back(nomBanque); // On ajoute à la liste
+        
+        cout << "Voulez-vous ajouter une autre banque ? (o/n) : ";
+        cin >> choix;
+    } while (choix == 'o' || choix == 'O');
+
+    // Configuration des paramètres de test
+    float capital = 200000;
     float taux[] = {3.0, 4.0};
     int durees[] = {10, 15, 20};
 
-    cout << fixed << setprecision(2);
+    cout << fixed << setprecision(2) << endl;
     cout << "--- COMPARATEUR DE PRETS (Capital: " << (int)capital << " ) ---" << endl << endl;
 
-    // Ligne d'en-tête avec le nom des banques
-    cout << setw(15) << "Duree / Banque" << " | ";
-    for (int i = 0; i < 4; i++) {
-        cout << setw(12) << banques[i] << " | ";
-    }
-    cout << "\n" << string(75, '-') << endl;
+    // Calcul de la largeur du tableau en fonction du nombre de banques
+    int largeurColonne = 12;
+    int nbBanques = banques.size();
 
-    // Boucle sur les différents taux (Taux 1 puis Taux 2)
+    // Ligne d'en-tête
+    cout << setw(15) << "Duree / Banque" << " | ";
+    for (const string& b : banques) {
+        cout << setw(largeurColonne) << b << " | ";
+    }
+    cout << endl << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl;
+
+    // Boucle sur les Taux
     for (int t = 0; t < 2; t++) {
         cout << " TAUX : " << taux[t] << "%" << endl;
-        cout << string(75, '-') << endl;
+        cout << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl;
 
-        // Pour chaque taux, on affiche les 3 durées
+        // Boucle sur les Durées
         for (int d = 0; d < 3; d++) {
             string label = to_string(durees[d]) + " ans";
             cout << setw(15) << label << " | ";
             
-            // Calcul pour chaque banque
-            for (int b = 0; b < 4; b++) {
+            // Calcul pour chaque banque de la liste
+            for (int i = 0; i < nbBanques; i++) {
                 float mens = simulateur.calculerMensualite(capital, taux[t], durees[d]);
-                cout << setw(12) << mens << " | ";
+                cout << setw(largeurColonne) << mens << " | ";
             }
             cout << endl;
         }
-        cout << string(75, '-') << endl << endl;
+        cout << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl << endl;
     }
 
     return 0;
