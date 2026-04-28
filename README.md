@@ -10,7 +10,7 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 
 ## Fonctionnalités
 
-### Objectif final :
+### Objectif final
 
 - Comparaison de plusieurs banques en une seule exécution
 - Choix des banques, des taux d'intérêts et des durrées
@@ -18,7 +18,7 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 - Prise en compte des taux d’intérêt spécifiques à chaque banque
 - Affichage des résultats dans un tableau comparatif
 
-### Objectif actuel :
+### Objectif actuel
 
 - Comparaison de 4 banque : CA, CM, LCL, BP
 - Chaque banque dispose de 2 taux d'intérêt : 3% et 4%
@@ -40,6 +40,13 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 3. Indiquer la durée de remboursement
 4. Lancer le programme
 5. Consulter le tableau comparatif généré
+
+## Résultat
+
+Tableau affichant pour chaque banque :
+- La mensualité
+- Le coût total du crédit
+- Le total des taux d'intérêts
 
 ## Avertissement
 
