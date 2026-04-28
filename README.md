@@ -20,7 +20,7 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 
 ### Objectif actuel :
 
-- Comparaison de 4 banque : CA, CR, LCL, BP
+- Comparaison de 4 banque : CA, CM, LCL, BP
 - Chaque banque dispose de 2 taux d'intérêt : 3% et 4%
 - 3 durées de prêt : 10ans, 15ans et 20ans
 - Calcul des mensualités pour chaque offre selon les durrées
