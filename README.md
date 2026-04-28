@@ -1,4 +1,4 @@
-# Comparateur d’Emprunts Bancaires
+# Comparateur d’Emprunts Bancaires (C++)
 
 ## Description
 
@@ -27,6 +27,19 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 - Prise en compte des taux d’intérêt spécifiques à chaque banque
 - Affichage des résultats dans un tableau comparatif
 
+## Données prises en compte
+
+- Montant de l’emprunt
+- Taux d’intérêt par banque
+- Durée de remboursement
+
+## Utilisation
+
+1. Renseigner le montant du prêt
+2. Entrer les taux proposés pour les différentes banques
+3. Indiquer la durée de remboursement
+4. Lancer le programme
+5. Consulter le tableau comparatif généré
 
 ## Avertissement
 
