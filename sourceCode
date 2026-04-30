@@ -1,77 +1,145 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
+#include <string>
+#include <vector>
 #include <cmath>
 #include <iomanip>
-#include <string>
-#include <vector> // Pour les listes dynamiques
+#include <sstream>
 
-using namespace std;
+class Bank{
+    public: 
+    std::string name;
+    std::vector<int> durations;
+    std::vector<float> rates;
+    std::vector<float> results;
+    //int duration1, duration2, duration3;
+    float capital;
+    //float rate1, rate2;
+    
+    Bank(std::string selectName, int selectDuration1, int selectDuration2, int selectDuration3, float selectRate1, float selectRate2) {
+        name = selectName;
+        durations.push_back(selectDuration1);
+        durations.push_back(selectDuration2);
+        durations.push_back(selectDuration3);
+        rates.push_back(selectRate1);
+        rates.push_back(selectRate2);
+    }
+    
+    void readCapital() {
+        std::cout << "Enter capital: ";
+        std::cin >> capital;
+    }
+    
+    void calculateValues() {
+    results.clear(); 
 
-class Emprunt {
-public:
-    float calculerMensualite(float cap, float tauxAnn, int nbAn) {
-        if (tauxAnn <= 0) return cap / (nbAn * 12);
-        float tauxMens = (tauxAnn / 100) / 12;
-        int nbMois = nbAn * 12;
-        float puissance = pow((1 + tauxMens), nbMois);
-        return (cap * tauxMens * puissance) / (puissance - 1);
+        for (int i = 0; i < durations.size(); i++) {
+            for (int j = 0; j < rates.size(); j++) {
+    
+                float r = rates[j] * 0.01f; // conversion en taux %
+                float value = capital * std::pow(1.0f + r, durations[i]);
+                results.push_back(value);
+            }
+        }
+    }
+    
+    void printValues() {
+        std::cout << "\n========================\n";
+        std::cout << "          " << name << "\n";
+        std::cout << "========================\n\n";
+    
+        int index = 0;
+    
+        for (int j = 0; j < rates.size(); j++) {
+            for (int i = 0; i < durations.size(); i++) {
+    
+                std::cout << "Taux:" << (j+1) << "     " << rates[j] << "%\n";
+                std::cout << "Duree:" << (i+1) << "    " << durations[i] << " ans\n";
+                std::cout << "Montant:   " << results[index] << " €\n";
+                std::cout << "------------------------\n";
+                index++;
+            }
+        }
     }
 };
 
-int main() {
-    Emprunt simulateur;
-    vector<string> banques; // Liste dynamique de banques
-    string nomBanque;
-    char choix;
-
-    // 1. Saisie dynamique des banques
-    cout << "--- CONFIGURATION DES BANQUES ---" << endl;
-    do {
-        cout << "Entrez le nom d'une banque : ";
-        cin >> nomBanque;
-        banques.push_back(nomBanque); // On ajoute à la liste
-        
-        cout << "Voulez-vous ajouter une autre banque ? (o/n) : ";
-        cin >> choix;
-    } while (choix == 'o' || choix == 'O');
-
-    // Configuration des paramètres de test
-    float capital = 200000;
-    float taux[] = {3.0, 4.0};
-    int durees[] = {10, 15, 20};
-
-    cout << fixed << setprecision(2) << endl;
-    cout << "--- COMPARATEUR DE PRETS (Capital: " << (int)capital << " ) ---" << endl << endl;
-
-    // Calcul de la largeur du tableau en fonction du nombre de banques
-    int largeurColonne = 12;
-    int nbBanques = banques.size();
-
-    // Ligne d'en-tête
-    cout << setw(15) << "Duree / Banque" << " | ";
-    for (const string& b : banques) {
-        cout << setw(largeurColonne) << b << " | ";
+class BankManager{
+    public: 
+    std::vector<Bank> bankList;
+    
+    void addBank(Bank &selectBankToAdd) {
+        bankList.push_back(selectBankToAdd);
     }
-    cout << endl << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl;
-
-    // Boucle sur les Taux
-    for (int t = 0; t < 2; t++) {
-        cout << " TAUX : " << taux[t] << "%" << endl;
-        cout << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl;
-
-        // Boucle sur les Durées
-        for (int d = 0; d < 3; d++) {
-            string label = to_string(durees[d]) + " ans";
-            cout << setw(15) << label << " | ";
+    
+    void printValues() {
+    int spacing = 15;
+    
+    // Ligne d'en-tête : noms des banques
+    std::cout << std::left << std::setw(spacing) << ""; // colonne 1 vide
+    for (const auto& b : bankList)
+        std::cout << std::left << std::setw(spacing) << b.name;
+    std::cout << "\n";
+    
+    int nbDur   = bankList[0].durations.size();
+    int nbRates = bankList[0].rates.size();
+    
+    for (int j = 0; j < nbRates; j++) {
+        for (int i = 0; i < nbDur; i++) {
+            int index = j * nbDur + i;
             
-            // Calcul pour chaque banque de la liste
-            for (int i = 0; i < nbBanques; i++) {
-                float mens = simulateur.calculerMensualite(capital, taux[t], durees[d]);
-                cout << setw(largeurColonne) << mens << " | ";
+            // Ligne Taux
+            std::cout << std::left << std::setw(spacing) << ("Taux" + std::to_string(j+1));
+            for (const auto& b : bankList)
+                std::cout << std::left << std::setw(spacing) << b.rates[j];
+            std::cout << "\n";
+            
+            // Ligne Duree
+            std::cout << std::left << std::setw(spacing) << ("Duree" + std::to_string(i+1));
+            for (const auto& b : bankList)
+                std::cout << std::left << std::setw(spacing) << b.durations[i];
+            std::cout << "\n";
+            
+            // Ligne Resultat
+            std::cout << std::left << std::setw(spacing) << "Resultat";
+            for (const auto& b : bankList) {
+                std::stringstream ss;
+                ss << std::fixed << std::setprecision(2) << b.results[index];
+                std::cout << std::left << std::setw(spacing) << ss.str();
             }
-            cout << endl;
+            std::cout << "\n";
         }
-        cout << string(18 + (nbBanques * (largeurColonne + 3)), '-') << endl << endl;
     }
+}
 
+
+
+};
+
+
+
+int main() {
+    BankManager myBankManager;
+    
+    Bank bank1("LCL",10,15,20,3,4);
+    Bank bank2("BNP",10,15,20,3,4);
+    Bank bank3("CA",10,15,20,3,4);
+    
+    myBankManager.addBank(bank1);
+    myBankManager.addBank(bank2);
+    //myBankManager.addBank(bank3);
+    
+    for(int i=0; i<myBankManager.bankList.size(); i++) {
+        myBankManager.bankList[i].readCapital();
+    }
+    
+    for(int i=0; i<myBankManager.bankList.size(); i++) {
+        myBankManager.bankList[i].calculateValues();
+    }
+    
+    myBankManager.printValues();
+    
+    
+    
+    
     return 0;
 }
