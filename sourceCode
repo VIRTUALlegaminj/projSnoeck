@@ -122,7 +122,7 @@ int main() {
     
     Bank bank1("LCL",10,15,20,3,4);
     Bank bank2("BNP",10,15,20,3,4);
-    Bank bank3("CA",10,15,20,3,4);
+    //Bank bank3("CA",10,15,20,3,4);
     
     myBankManager.addBank(bank1);
     myBankManager.addBank(bank2);
