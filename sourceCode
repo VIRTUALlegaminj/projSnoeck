@@ -120,13 +120,17 @@ class BankManager{
 int main() {
     BankManager myBankManager;
     
-    Bank bank1("LCL",10,15,20,3,4);
-    Bank bank2("BNP",10,15,20,3,4);
-    //Bank bank3("CA",10,15,20,3,4);
+    Bank bank1("CA",10,15,20,3,4);
+    Bank bank2("CM",10,15,20,3,4);
+    Bank bank3("LCL",10,15,20,3,4);
+    Bank bank4("BP",10,15,20,3,4);
+
     
     myBankManager.addBank(bank1);
     myBankManager.addBank(bank2);
-    //myBankManager.addBank(bank3);
+    myBankManager.addBank(bank3);
+    myBankManager.addBank(bank4);
+
     
     for(int i=0; i<myBankManager.bankList.size(); i++) {
         myBankManager.bankList[i].readCapital();
