@@ -26,7 +26,7 @@ class Bank{
     }
     
     void readCapital() {
-        std::cout << "Enter capital: ";
+        std::cout << "Enter capital pour " <<name << " : ";
         std::cin >> capital;
     }
     
