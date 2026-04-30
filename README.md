@@ -48,7 +48,7 @@ Tableau affichant pour chaque banque :
 - Le coût total du crédit
 - Le total des taux d'intérêts
 
-<img width="465" height="487" alt="image" src="https://github.com/user-attachments/assets/6218c8c6-38d6-4dd5-a806-d01596840c11" />
+<img width="581" height="508" alt="image" src="https://github.com/user-attachments/assets/c40cfde2-575d-49d9-ba2b-35e499cf1f39" />
 
 ## Avertissement
 
