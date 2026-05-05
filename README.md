@@ -14,7 +14,7 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 
 - Comparaison de plusieurs banques en une seule exécution
 - Choix des banques, des taux d'intérêts et des durrées
-- Calcul des mensualités pour chaque offre selon les durées
+- Calcul des montant à rembourser pour chaque offre selon les durées
 - Prise en compte des taux d’intérêt spécifiques à chaque banque
 - Affichage des résultats dans un tableau comparatif
 
@@ -23,9 +23,9 @@ L’objectif est d’aider l’utilisateur à identifier rapidement l’offre ba
 - Comparaison de 4 banques : CA, CM, LCL, BP
 - Chaque banque dispose de 2 taux d'intérêt : 3% et 4%
 - 3 durées de prêt : 10ans, 15ans et 20ans
-- Calcul des mensualités pour chaque offre selon les durrées
-- Prise en compte des taux d’intérêt spécifiques à chaque banque
-- Affichage des résultats dans un tableau comparatif
+- Saisie du capital emprunté pour chaque banque
+- Calcul du montant total
+- Affichage des résultats dans un tableau comparatif formaté
 
 ## Données prises en compte
 
